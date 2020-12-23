@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: acmeair-bookingservice
+  labels:
+    app.kubernetes.io/part-of: acmeair-bookingservice
 spec:
   replicas: 1
   selector:
@@ -52,6 +54,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: acmeair-booking-service
+  labels:
+    app.kubernetes.io/part-of: acmeair-bookingservice
 spec:
   ports:
     - port: 9080
@@ -59,29 +63,13 @@ spec:
     name: acmeair-booking-deployment
 ---
 ##### Booking Database  #####
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    service: acmeair-booking-db
-  name: acmeair-booking-db
-spec:
-  ports:
-  - name: "27017"
-    port: 27017
-    protocol: TCP
-    targetPort: 27017
-  selector:
-    name: acmeair-booking-db
-status:
-  loadBalancer: {}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
   name: acmeair-booking-db
+  labels:
+    app.kubernetes.io/part-of: acmeair-bookingservice
 spec:
   replicas: 1
   selector:
@@ -113,3 +101,22 @@ spec:
             mountPath: /data/db
       restartPolicy: Always
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: acmeair-booking-db
+  labels:
+    service: acmeair-booking-db
+    app.kubernetes.io/part-of: acmeair-bookingservice
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-booking-db
+status:
+  loadBalancer: {}
