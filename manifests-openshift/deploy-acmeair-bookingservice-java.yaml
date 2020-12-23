@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: acmeair-bookingservice
   labels:
-    app.kubernetes.io/part-of: acmeair-bookingservice
+    app.kubernetes.io/part-of: booking-service
 spec:
   replicas: 1
   selector:
@@ -55,7 +55,7 @@ kind: Service
 metadata:
   name: acmeair-booking-service
   labels:
-    app.kubernetes.io/part-of: acmeair-bookingservice
+    app.kubernetes.io/part-of: booking-service
 spec:
   ports:
     - port: 9080
@@ -69,7 +69,7 @@ metadata:
   creationTimestamp: null
   name: acmeair-booking-db
   labels:
-    app.kubernetes.io/part-of: acmeair-bookingservice
+    app.kubernetes.io/part-of: booking-service
 spec:
   replicas: 1
   selector:
@@ -109,7 +109,7 @@ metadata:
   name: acmeair-booking-db
   labels:
     service: acmeair-booking-db
-    app.kubernetes.io/part-of: acmeair-bookingservice
+    app.kubernetes.io/part-of: booking-service
 spec:
   ports:
   - name: "27017"

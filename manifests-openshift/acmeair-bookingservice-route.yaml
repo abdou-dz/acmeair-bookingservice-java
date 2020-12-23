@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: acmeair-booking-route
   labels:
-    app.kubernetes.io/part-of: acmeair-bookingservice
+    app.kubernetes.io/part-of: booking-service
 spec:
   host: _HOST_
   path: /booking
