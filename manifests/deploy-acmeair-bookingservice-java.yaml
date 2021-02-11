@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: acmeair-bookingservice-java
-        image: docker.io/yigitpolat/acmeair-bookingservice-java:latest
+        image: docker.io/abdouibm/acmeair-bookingservice-java:latest
         ports:
           - containerPort: 9080
           - containerPort: 9443
